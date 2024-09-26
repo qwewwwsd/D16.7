@@ -1,0 +1,25 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<hr>
+<h1>Объявление</h1>
+<h3>{{ time_now|date:'M d Y' }}</h3>
+<hr>
+<table>
+    <tr><td>Автор:  {{post_id.author}}</td></tr>
+    <tr><td>Заголовок: {{post_id.title}}</td></tr>
+    <tr><td>Категория:  {{post_id.category}}</td></tr>
+    <tr><td>Текст:  {{post_id.text|safe}}</td></tr>
+</table>
+<form>
+    {{ form.media }}
+    {{ form.as_p }}
+</form>
+{% endblock content %}
+

@@ -1,0 +1,36 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+post
+{% endblock title %}
+
+{% block content %}
+
+<h1>Объявления</h1>
+
+   <hr>
+   {% if post %}
+    <table style="margin-left: 1px; margin-rith: ;">
+        <tr>
+               <td style="width: 200px"><u>Автор:</u></td>
+               <td style="width: 200px"><u>Заголовок:</u></td>
+               <td style="width: 200px"><u>Содержание:</u></td>
+               <td style="width: 200px"><u>Категория:</u></td>
+               <td style="width: 200px"><u>Номер поста:</u></td>
+           </tr>
+           {% for new in post %}
+           <tr>
+               <td style="width: 250px"><a href={% url 'post_id' new.id%} >{{new.author}}</a></td>
+               <td style="width: 250px">{{new.title}}</td>
+               <td style="width: 250px">{{new.text|truncatechars:10}}</td>
+               <td style="width: 250px">{{new.category}}</td>
+               <td style="width: 250px">{{new.id}}</td>
+           </tr>
+           {% endfor %}
+
+    </table>
+   {% else %}
+       <h2>Публикаций нет!</h2>
+   {% endif %}
+
+{% endblock content %}

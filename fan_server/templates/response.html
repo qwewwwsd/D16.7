@@ -1,0 +1,46 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+response
+{% endblock title %}
+
+{% block content %}
+
+<h1>Отклики</h1>
+
+<hr>
+
+<form action="" method="get">
+    {{ filterset.form.as_p }}
+    <button type="submit">Поиск</button>
+</form>
+
+<hr>
+
+{% if response%}
+    <table style="margin-left: 1px; margin-rith: ;">
+        <tr>
+            <td style="width: 200px"><u>Автор отклика:</u></td>
+            <td style="width: 200px"><u>Содержание:</u></td>
+            <td style="width: 200px"><u>Объявления:</u></td>
+        </tr>
+        {% for re in response %}
+        <tr>
+            <td style="width: 250px">{{re.author}}</td>
+            <td style="width: 250px">{{re.text|truncatechars:20}}</td>
+            <td style="width: 250px">{{re.post}}</td>
+            <td style="width: 200px"><button type="submit"><a href={% url 'response_delete' re.id%}> Удалить </a></button></td>
+            {% if re.status == False %}
+            <td style="width: 250px"><button type="submit"><a href={% url 'response_status' re.id %}>Принять</a></button> </td>
+            {% else %}
+            <td style="width: 250px">Отклик принят!</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+    <h2>Откликов нет!</h2>
+{% endif %}
+
+{% endblock content %}
